@@ -2,6 +2,7 @@ package com.origami.teach.servlet;
 
 import com.origami.teach.model.StockData;
 import com.origami.teach.model.StockQuote;
+import services.ServiceFactory;
 import services.StockService;
 import services.StockServiceException;
 import util.Interval;
@@ -22,7 +23,7 @@ import java.util.*;
 
 public class StockSearchServlet extends HttpServlet {
 
-    StockService databaseStockService;
+    private StockService databaseStockService = ServiceFactory.getStockService();
     private static final String SYMBOL_PARAMETER_KEY = "symbol";
     private static final String START_PARAMETER_KEY = "start";
     private static final String END_PARAMETER_KEY = "end";
