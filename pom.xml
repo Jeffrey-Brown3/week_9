@@ -128,6 +128,7 @@
               </configuration>
           </plugin>
 
+
               <plugin>
                   <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-surefire-plugin</artifactId>
@@ -135,11 +136,19 @@
                   <configuration>
                       <excludes>
                           <exclude>**/AbstractBaseDAOTest.java</exclude>
-                          <exclude>\*\*/\*DAOTest.java</exclude>
-                          <exclude>\*\*/Database\*.java</exclude>
+                          <exclude>**/PersonDAOTest.java</exclude>
+                          <exclude>**/PersonStocksDAOTest.java</exclude>
+                          <exclude>**/QuoteDAOTest.java</exclude>
+                          <exclude>**/StockSymbolDAOTest.java</exclude>
+                          <exclude>**/DatabaseServiceTest.java</exclude>
+                          <exclude>**/DatabaseStockServiceTest.java</exclude>
+                          <exclude>**/DatabaseUserService.java</exclude>
+                          <exclude>**/DatabaseUtilsTest.java</exclude>
                       </excludes>
                   </configuration>
               </plugin>
+
+
       </plugins>
   </build>
 
