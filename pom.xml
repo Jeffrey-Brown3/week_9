@@ -142,7 +142,7 @@
                           <exclude>**/StockSymbolDAOTest.java</exclude>
                           <exclude>**/DatabaseServiceTest.java</exclude>
                           <exclude>**/DatabaseStockServiceTest.java</exclude>
-                          <exclude>**/DatabaseUserService.java</exclude>
+                          <exclude>**/DatabaseUserServiceTest.java</exclude>
                           <exclude>**/DatabaseUtilsTest.java</exclude>
                       </excludes>
                   </configuration>
