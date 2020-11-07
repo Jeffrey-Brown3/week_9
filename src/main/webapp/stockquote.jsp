@@ -15,7 +15,7 @@
     please enter a end date (formatted as yyyy-mm-dd)  <input type="text" name="end" value="2015-02-11 01:08:01">
     <br>
     <p>Please enter an interval:</p>
-    <input type="radio" id="day"name="interval" value="day">
+    <input type="radio" id="day" name="interval" value="day" checked>
     <label for="day">Day</label><br>
     <input type="radio" id="minute" name="interval" value="minute">
     <label for="minute">Minute</label><br>

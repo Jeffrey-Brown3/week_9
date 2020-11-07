@@ -28,7 +28,7 @@ public class StockSearchServlet extends HttpServlet {
     private static final String START_PARAMETER_KEY = "start";
     private static final String END_PARAMETER_KEY = "end";
     private static final String INTERVAL_PARAMETER_KEY = "interval";
-    List<StockQuote> stockQuotes;
+    List<StockQuote> stockQuotes = new ArrayList<>();
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,6 +39,8 @@ public class StockSearchServlet extends HttpServlet {
         String interval = request.getParameter(INTERVAL_PARAMETER_KEY);
 
 
+        HttpSession session = request.getSession();
+
         try {
 
             Calendar fromCalendar = makeCalendarFromString(startDate);
@@ -46,21 +48,31 @@ public class StockSearchServlet extends HttpServlet {
             //null pointer exception is marked as occurring here when running page, im guessing because im not getting any results from the database?
             if (interval.equals("day")) {
                 stockQuotes = databaseStockService.getQuote(symbol, fromCalendar, untilCalendar, Interval.DAY);
+
             }
             if (interval.equals("minute")){
                 stockQuotes = databaseStockService.getQuote(symbol, fromCalendar, untilCalendar, Interval.DAY);
             }
 
-            HttpSession session = request.getSession();
-            if (stockQuotes != null){
+            if (session != null && request != null) {
                 session.setAttribute("quotes", stockQuotes);
+                ServletContext servletContext = getServletContext();
+                RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/stockquoteResults.jsp");
+                dispatcher.forward(request, response);
+            }else{
+                PrintWriter writer = response.getWriter();
+
+                // build HTML code
+                String htmlResponse = "<html>";
+                htmlResponse += "<h2>The session or response is null<br/>" + "</h2>";
+                htmlResponse += "</html>";
+
+                // return response
+                writer.println(htmlResponse);
             }
 
 
 
-            ServletContext servletContext = getServletContext();
-            RequestDispatcher dispatcher = servletContext.getRequestDispatcher("/stockquoteResults.jsp");
-            dispatcher.forward(request, response);
 
         } catch (ParseException | StockServiceException e) {
             e.printStackTrace();
